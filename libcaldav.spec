@@ -9,8 +9,7 @@
 %endif
 %define tde_pkg libcaldav
 %define tde_prefix /opt/trinity
-%define tde_includedir %{tde_prefix}/include
-%define tde_libdir %{tde_prefix}/%{_lib}
+
 
 %define libcaldav %{_lib}caldav
 
@@ -37,7 +36,7 @@ License:	GPLv2+
 Source0:	https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}%{?preversion:~%{preversion}}.tar.xz
 
 BuildSystem:    cmake
-BuildOption:    -DCMAKE_BUILD_TYPE="RelWithDebInfo" \
+BuildOption:    -DCMAKE_BUILD_TYPE="RelWithDebInfo"
 BuildOption:    -DWITH_ALL_OPTIONS=ON
 BuildOption:    -DBUILD_ALL=ON -DBUILD_DOC=ON -DBUILD_TRANSLATIONS=ON 
 BuildOption:    -DWITH_GCC_VISIBILITY=%{!?with_clang:ON}%{?with_clang:OFF}
@@ -122,7 +121,7 @@ This package includes the development files.
 
 %conf -p
 unset QTDIR QTINC QTLIB
-export PATH="%{tde_bindir}:${PATH}"
+export PATH="%{tde_prefix}/bin:${PATH}"
 
 %install -a
 # Fix duplicate files
