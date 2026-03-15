@@ -4,8 +4,8 @@
 %define tde_epoch 2
 %if "%{?tde_version}" == ""
 %define tde_version 14.1.5
-
 %endif
+
 %define tde_pkg libcaldav
 %define tde_prefix /opt/trinity
 
@@ -25,7 +25,7 @@
 Name:		trinity-%{tde_pkg}
 Epoch:		%{tde_epoch}
 Version:	0.6.5
-Release:	%{?tde_version:%{tde_version}_}5
+Release:	%{?tde_version:%{tde_version}_}6
 Summary:	A client library that adds support for the CalDAV protocol (rfc4791)
 Group:		System/Libraries
 URL:		http://www.trinitydesktop.org/
@@ -64,8 +64,6 @@ easy to integrate CalDAV support into any PIM application.
 Summary:	A client library that adds support for the CalDAV protocol (rfc4791)
 Group:		System/Libraries
 
-Obsoletes:	trinity-libcaldav < %{?epoch:%{epoch}:}%{version}-%{release}
-
 %description -n %{libname}0
 libcaldev is a client library that adds support for the CalDAV protocol (rfc4791).
 The object is to have a library which fully implements the protocol so that it is
@@ -82,11 +80,11 @@ easy to integrate CalDAV support into any PIM application.
 %package -n %{devname}
 Summary:	A client library that adds support for the CalDAV protocol (Development Files)
 Group:		Development/Libraries/Other
-Requires:	%{libname}0 = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:	%{libname}0 = %{EVRD}
 %{?libcurl_devel:Requires: %{libcurl_devel}}
 Requires:	pkgconfig(glib-2.0)
 
-Obsoletes:	trinity-libcaldav-devel < %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes:	trinity-libcaldav-devel < %{EVRD}
 
 %description -n %{devname}
 libcaldev is a client library that adds support for the CalDAV protocol (rfc4791).
