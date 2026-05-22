@@ -1,10 +1,6 @@
 %bcond clang 1
 
 # TDE variables
-%if "%{?tde_version}" == ""
-%define tde_version 14.1.5
-%endif
-
 %define tde_pkg libcaldav
 %define tde_prefix /opt/trinity
 
@@ -16,21 +12,21 @@
 %define _disable_rebuild_configure 1
 
 # fixes error: Empty %files file …/debugsourcefiles.list
-%define _debugsource_template %{nil}
+%undefine _debugsource_template
 
 %define tarball_name %{tde_pkg}-trinity
 
 
 Name:		trinity-%{tde_pkg}
-Version:	0.6.5
-Release:	%{?tde_version:%{tde_version}_}7
+Version:	14.1.6
+Release:	1
 Summary:	A client library that adds support for the CalDAV protocol (rfc4791)
 Group:		System/Libraries
 URL:		http://www.trinitydesktop.org/
 
 License:	GPLv2+
 
-Source0:	https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}.tar.xz
+Source0:	https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{version}/main/dependencies/%{tarball_name}-%{version}.tar.xz
 
 BuildSystem:    cmake
 
@@ -39,7 +35,7 @@ BuildOption:    -DWITH_ALL_OPTIONS=ON
 BuildOption:    -DBUILD_ALL=ON -DBUILD_DOC=ON -DBUILD_TRANSLATIONS=ON 
 BuildOption:    -DWITH_GCC_VISIBILITY=%{!?with_clang:ON}%{?with_clang:OFF}
 
-BuildRequires:	trinity-tde-cmake >= %{tde_version}
+BuildRequires:	trinity-tde-cmake >= %{version}
 BuildRequires:	libtool
 BuildRequires:	fdupes
 
@@ -79,8 +75,6 @@ Group:		Development/Libraries/Other
 Requires:	%{libname}0 = %{EVRD}
 %{?libcurl_devel:Requires: %{libcurl_devel}}
 Requires:	pkgconfig(glib-2.0)
-
-Obsoletes:	trinity-libcaldav-devel < %{EVRD}
 
 %description -n %{devname}
 %summary
